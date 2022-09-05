@@ -10,11 +10,24 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float _mouseSensitivityY = 5f;
     private float rotY = 0.0f;
 
+    private bool isEnabledCursor = true;
+
     void Update()
     {
         CameraMovement();
         Sprint();
         JumpAndCrouch();
+
+        HideOrShowCursor();
+    }
+
+    private void HideOrShowCursor()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            isEnabledCursor = !isEnabledCursor;
+            Cursor.visible = isEnabledCursor;
+        }
     }
 
     private void CameraMovement()
@@ -25,13 +38,10 @@ public class CameraManager : MonoBehaviour
         transform.Translate(Vector3.forward * moveVertical * Time.deltaTime);
         transform.Translate(Vector3.right * moveHorizontal * Time.deltaTime);
 
-        if (Input.GetMouseButton(1))
-        {
-            float rotX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * _mouseSensitivityX;
-            rotY += Input.GetAxis("Mouse Y") * _mouseSensitivityY;
-            rotY = Mathf.Clamp(rotY, -90f, 90f);
-            transform.localEulerAngles = new Vector3(-rotY, rotX, 0.0f);
-        }
+        float rotX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * _mouseSensitivityX;
+        rotY += Input.GetAxis("Mouse Y") * _mouseSensitivityY;
+        rotY = Mathf.Clamp(rotY, -90f, 90f);
+        transform.localEulerAngles = new Vector3(-rotY, rotX, 0.0f);
     }
 
     private void JumpAndCrouch()
