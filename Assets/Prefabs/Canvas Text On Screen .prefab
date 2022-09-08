@@ -115,8 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textMesh: {fileID: 6824915284856518974}
-  _endValue: {x: 1, y: 1, z: 1}
-  _endDuration: 0.25
+  _endScaleValue: {x: 1, y: 1, z: 1}
+  _scaleDuration: 0.5
 --- !u!1 &6824915284856518968
 GameObject:
   m_ObjectHideFlags: 0
