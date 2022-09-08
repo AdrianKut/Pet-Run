@@ -32,16 +32,19 @@ public class CameraManager : MonoBehaviour
 
     private void CameraMovement()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal") * _speed;
-        float moveVertical = Input.GetAxis("Vertical") * _speed;
+            float moveHorizontal = Input.GetAxis("Horizontal") * _speed;
+            float moveVertical = Input.GetAxis("Vertical") * _speed;
 
-        transform.Translate(Vector3.forward * moveVertical * Time.deltaTime);
-        transform.Translate(Vector3.right * moveHorizontal * Time.deltaTime);
+            transform.Translate(Vector3.forward * moveVertical * Time.deltaTime);
+            transform.Translate(Vector3.right * moveHorizontal * Time.deltaTime);
 
-        float rotX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * _mouseSensitivityX;
-        rotY += Input.GetAxis("Mouse Y") * _mouseSensitivityY;
-        rotY = Mathf.Clamp(rotY, -90f, 90f);
-        transform.localEulerAngles = new Vector3(-rotY, rotX, 0.0f);
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            float rotX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * _mouseSensitivityX;
+            rotY += Input.GetAxis("Mouse Y") * _mouseSensitivityY;
+            rotY = Mathf.Clamp(rotY, -90f, 90f);
+            transform.localEulerAngles = new Vector3(-rotY, rotX, 0.0f);
+        }
     }
 
     private void JumpAndCrouch()
