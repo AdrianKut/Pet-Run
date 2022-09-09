@@ -11,10 +11,18 @@ public class LeftBar : MonoBehaviour
     [SerializeField] private Vector2 _endLeftBarPositionValue = new Vector2(0, 0);
     [SerializeField] private float _durationShowAndHideBar;
     [SerializeField] private Ease _ease;
-    private bool isActivateLeftBar = false;
+    private bool isActivateLeftBar = true;
+    
+    [Space]
+    [SerializeField] private GameObject _gameObjectControlPanel;
+    [SerializeField] private GameObject _gameObjectPlayerListPanel;
 
     [Space]
     [SerializeField] private GameObject _gameObjectAskToQuit;
+
+    [Header("Buttons")]
+    [SerializeField] private Button _buttonStart;
+    [SerializeField] private Button _buttonJoin;
 
     void Update()
     {
@@ -31,7 +39,8 @@ public class LeftBar : MonoBehaviour
             {
                 _gameObjectLeftBar.SetActive(true);
 
-                DOTween.To(() => rectTransform.offsetMin, x => rectTransform.offsetMin = x, _endLeftBarPositionValue, _durationShowAndHideBar);
+                DOTween.To(() => rectTransform.offsetMin, x => rectTransform.offsetMin = x,
+                    _endLeftBarPositionValue, _durationShowAndHideBar);
                 
                 isActivateLeftBar = true;
             }
@@ -45,17 +54,35 @@ public class LeftBar : MonoBehaviour
         }
     }
 
-    //disable start button when game is started
+    public void ShowControlsPanel()
+    {
+        _gameObjectControlPanel.SetActive(true);
+    }
+
+    public void ShowPlayerListPanel()
+    {
+        _gameObjectPlayerListPanel.SetActive(true);
+    }
+
+    public void HidePanels()
+    {
+        //_gameObjectPlayerListPanel?.SetActive(false);
+        //_gameObjectControlPanel?.SetActive(false);
+
+        _gameObjectPlayerListPanel?.SetActive(!_gameObjectPlayerListPanel.activeSelf);
+        _gameObjectControlPanel?.SetActive(!_gameObjectControlPanel.activeSelf);
+    }
+
     public void StartGameOnClick()
     {
-        //EventSystem.current.currentSelectedGameObject.GetComponent<Button>().interactable = false;
+        _buttonStart.interactable = false;
+        _buttonJoin.interactable = false;
         StartCoroutine(GameManager.Instance.StartGame());
     }
 
-
     public void JoinOnClick()
     {
-        EventSystem.current.currentSelectedGameObject.GetComponent<Button>().interactable = false;
+        _buttonJoin.interactable = false;
         var chatPlayerMessage = new ChatPlayerMessage(PlayerPrefs.GetString("username"), "!j");
         GameManager.Instance.PlayersManager.JoinPlayerToTheGame(chatPlayerMessage);
     }

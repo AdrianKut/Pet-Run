@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
@@ -20,11 +18,6 @@ public class AskToQuitManager : MonoBehaviour
     private void OnDisable()
     {
         transform.DOScale(0f,0f);
-    }
-
-    public void YesOnClick()
-    {
-        SceneManager.LoadScene("Menu");
     }
 
     public void NoOnClick()

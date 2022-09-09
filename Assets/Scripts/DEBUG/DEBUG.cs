@@ -31,14 +31,11 @@ public class DEBUG : MonoBehaviour
             GameManager.Instance.UIManager.PopupMessageItemManager.InstantiateItem("DEAD", ItemType.Death);
         }
 
-
         if (Input.GetKeyDown(KeyCode.K))
         {
             var tempGameObject = FindObjectOfType<Player>();
             GameManager.Instance.DestroyPlayer(tempGameObject.gameObject, true);
         }
-
-
     }
 
 }
