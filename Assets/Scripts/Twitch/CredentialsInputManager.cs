@@ -46,12 +46,5 @@ public class CredentialsInputManager : MonoBehaviour
             _errorText.text = "Connection established!";
             _buttonStart.interactable = true;
         }
-
-
-    }
-
-    public void StartOnClick()
-    {
-        SceneManager.LoadScene(1);
     }
 }
