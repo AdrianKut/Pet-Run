@@ -16,8 +16,11 @@ public class GameManager : MonoBehaviour
     private GameManager() { }
 
     public UIManager UIManager;
-    public PlayersManager PlayersManager;
     public TwitchChat TwitchChat;
+    public PlayersManager PlayersManager;
+    public PlayerListManager PlayerListManager;
+
+    [SerializeField] private GameObject _gameObjectGameOverCanvas;
 
     private void Awake()
     {
@@ -61,41 +64,12 @@ public class GameManager : MonoBehaviour
         PlayersManager.PlayersMoveManager(true);
     }
 
-    public void DestroyPlayer(GameObject gameObject, bool isDead)
+    public void GameOver()
     {
-        if (isDead == true)
-        {
-            UIManager.PopupMessageItemManager.InstantiateItem(gameObject.name, ItemType.Death);
-        }
-        else 
-        {
-            UIManager.PopupMessageItemManager.InstantiateItem(gameObject.name, ItemType.Winning);
-        }
+        GameState = GameState.GameOver;
 
-        PlayersManager.ListGameObjectsPlayers.Remove(gameObject);
-        PlayersManager.SetTextPlayersCounter();
+        _gameObjectGameOverCanvas.SetActive(true);
 
-        Destroy(gameObject);
-
-        CheckIsTheGameOver();
-    }
-
-    public void Winner(GameObject gameObject)
-    {
-        string time = UIManager.Timer.GetTime();
-        PlayersManager.DictionaryGameObjectsWinners.Add(gameObject, time);
-
-        UIManager.HighscoreManager.InstantiateItem(gameObject.name + " - " + time);
-        //UIManager.HighscoreManager.ChangeColorHighscoreItem(gameObject.name, Color.green);
-
-        DestroyPlayer(gameObject, false);
-    }
-
-    private void CheckIsTheGameOver()
-    {
-        if (PlayersManager.ListGameObjectsPlayers.Count == 0)
-        {
-            Debug.LogWarning("GAME OVER");
-        }
+        Destroy(UIManager.gameObject);
     }
 }

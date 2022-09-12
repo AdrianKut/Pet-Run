@@ -54,21 +54,8 @@ public class LeftBar : MonoBehaviour
         }
     }
 
-    public void ShowControlsPanel()
-    {
-        _gameObjectControlPanel.SetActive(true);
-    }
-
-    public void ShowPlayerListPanel()
-    {
-        _gameObjectPlayerListPanel.SetActive(true);
-    }
-
     public void HidePanels()
     {
-        //_gameObjectPlayerListPanel?.SetActive(false);
-        //_gameObjectControlPanel?.SetActive(false);
-
         _gameObjectPlayerListPanel?.SetActive(!_gameObjectPlayerListPanel.activeSelf);
         _gameObjectControlPanel?.SetActive(!_gameObjectControlPanel.activeSelf);
     }

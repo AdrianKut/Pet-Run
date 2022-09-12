@@ -13,8 +13,8 @@ public class PlayersManager : MonoBehaviour
     [SerializeField] private GameObject _gameObjectPlayer;
 
     public List<GameObject> ListGameObjectsPlayers = new List<GameObject>();
-    public Dictionary<GameObject, string> DictionaryGameObjectsWinners = new Dictionary<GameObject, string>();
-    
+    public Dictionary<string, string> DictionaryGameObjectsWinners = new Dictionary<string, string>();
+
     public void JoinPlayerToTheGame(ChatPlayerMessage chatPlayerMessage)
     {
         var isAdded = false;
@@ -29,10 +29,7 @@ public class PlayersManager : MonoBehaviour
 
         if (chatPlayerMessage.Message == "!j" && isAdded == false && GameManager.Instance.GameState == GameState.Pause)
         {
-           // GameManager.Instance.UIManager.HighscoreManager.InstantiateItem(chatPlayerMessage.User);
             SpawnNewPlayer(chatPlayerMessage.User);
-
-            //GameManager.Instance.TwitchChat.WriteChat($"{chatPlayerMessage.User} has joined!");
             GameManager.Instance.UIManager.PopupMessageItemManager.InstantiateItem(chatPlayerMessage.User, ItemType.NewPlayer);
 
             _numberOfPlayers++;
@@ -54,6 +51,8 @@ public class PlayersManager : MonoBehaviour
         newPlayer.GetComponent<Player>().SetDestinationPosition(_destinationPosition);
 
         ListGameObjectsPlayers.Add(newPlayer);
+
+        GameManager.Instance.PlayerListManager.InstantiateItem($"{ListGameObjectsPlayers.Count} . {nickname}");
     }
 
     public void PlayerStartOrStopMove(ChatPlayerMessage chatPlayerMessage, string command, bool isStopped)
@@ -82,6 +81,53 @@ public class PlayersManager : MonoBehaviour
     public void SetTextPlayersCounter()
     {
         _textPlayersCounter.text = $"{ListGameObjectsPlayers.Count}/{_numberOfPlayers}";
+    }
+
+    public void DestroyPlayer(GameObject gameObject, bool isDead)
+    {
+        if (isDead == true)
+        {
+            Color32 redColor = new Color32(224, 0, 0, 255);
+            GameManager.Instance.PlayerListManager.ChangeColorHighscoreItem(gameObject.name, redColor);
+            GameManager.Instance.UIManager.PopupMessageItemManager.InstantiateItem(gameObject.name, ItemType.Death);
+        }
+        else
+        {
+            Color32 greenColor = new Color32(87, 224, 0, 255);
+            GameManager.Instance.PlayerListManager.ChangeColorHighscoreItem(gameObject.name, greenColor);
+            GameManager.Instance.UIManager.PopupMessageItemManager.InstantiateItem(gameObject.name, ItemType.Winning);
+
+            string time = GameManager.Instance.UIManager.Timer.GetTime();
+            GameManager.Instance.UIManager.HighscoreManager.InstantiateItem(gameObject.name + " - " + time);
+            DictionaryGameObjectsWinners.Add(gameObject.name, time);
+        }
+
+        ListGameObjectsPlayers.Remove(gameObject);
+        SetTextPlayersCounter();
+
+        Destroy(gameObject);
+
+        CheckAllPlayersAreDeadAndActivateTheGameOver();
+    }
+
+    private void CheckAllPlayersAreDeadAndActivateTheGameOver()
+    {
+        if (ListGameObjectsPlayers.Count == 0)
+        {
+            GameManager.Instance.GameOver();
+
+            foreach (KeyValuePair<string, string> item in DictionaryGameObjectsWinners)
+            {
+                //Debug.Log(item.Key + " " + item.Value);
+            }
+
+            //Debug.Log(PlayersManager.DictionaryGameObjectsWinners.First().Key + " " + PlayersManager.DictionaryGameObjectsWinners.First().Key + " WINNER!");
+        }
+    }
+
+    private void ShowWinner()
+    {
+
     }
 
 

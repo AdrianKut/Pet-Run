@@ -34,7 +34,7 @@ public class DEBUG : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             var tempGameObject = FindObjectOfType<Player>();
-            GameManager.Instance.DestroyPlayer(tempGameObject.gameObject, true);
+            GameManager.Instance.PlayersManager.DestroyPlayer(tempGameObject.gameObject, true);
         }
     }
 

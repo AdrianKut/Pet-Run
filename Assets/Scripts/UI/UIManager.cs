@@ -25,13 +25,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
     public void DisplayTextOnScreen(string text)
     {
         var tempText = Instantiate(GameObjectPrefabTextOnScreen, GameObjectPrefabTextOnScreen.transform.position, Quaternion.identity)
-            .transform.GetComponent<TextOnScreen>();
+            .transform.GetComponent<PopupSmallTextOnScreen>();
 
         tempText.SetText(text);
     }
 
+    private void OnDestroy()
+    {
+        Destroy(_gameObjectCanvas);
+    }
 }
