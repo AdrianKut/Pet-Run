@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
 
     [Space]
     public Timer Timer;
-    public HighscoreManager HighscoreManager;
+    public TopPlayersManager HighscoreManager;
     public PopupMessageItemManager PopupMessageItemManager;
     public GameObject GameObjectPrefabTextOnScreen;
 

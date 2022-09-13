@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DEBUG : MonoBehaviour
 {
@@ -35,6 +36,11 @@ public class DEBUG : MonoBehaviour
         {
             var tempGameObject = FindObjectOfType<Player>();
             GameManager.Instance.PlayersManager.DestroyPlayer(tempGameObject.gameObject, true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(1);
         }
     }
 

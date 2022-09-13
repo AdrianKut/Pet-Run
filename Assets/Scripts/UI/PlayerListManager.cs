@@ -6,12 +6,15 @@ public class PlayerListManager : MonoBehaviour, IItemManager
     [SerializeField] private GameObject _gameObjectPlayerListItem;
     [SerializeField] private GameObject _playerListParent;
 
-    public void InstantiateItem(string message)
+    public void InstantiateItem(string text, Color color)
     {
-            var item = Instantiate(_gameObjectPlayerListItem);
-            item.transform.SetParent(_playerListParent.transform);
-            item.name = message;
-            item.GetComponent<TextMeshProUGUI>().SetText(message);       
+        var item = Instantiate(_gameObjectPlayerListItem);
+        item.transform.SetParent(_playerListParent.transform);
+        item.name = text;
+
+        var itemText = item.GetComponent<TextMeshProUGUI>();
+        itemText.text = text;
+        itemText.color = color;
     }
 
     public void ChangeColorHighscoreItem(string nameOfGameObject, Color color)

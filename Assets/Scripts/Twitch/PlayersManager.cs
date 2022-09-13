@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class PlayersManager : MonoBehaviour
 
     public List<GameObject> ListGameObjectsPlayers = new List<GameObject>();
     public Dictionary<string, string> DictionaryGameObjectsWinners = new Dictionary<string, string>();
+    public Dictionary<string, string> DictionaryGameObjectsLosers = new Dictionary<string, string>();
 
     public void JoinPlayerToTheGame(ChatPlayerMessage chatPlayerMessage)
     {
@@ -52,7 +54,7 @@ public class PlayersManager : MonoBehaviour
 
         ListGameObjectsPlayers.Add(newPlayer);
 
-        GameManager.Instance.PlayerListManager.InstantiateItem($"{ListGameObjectsPlayers.Count} . {nickname}");
+        GameManager.Instance.PlayerListManager.InstantiateItem($"{ListGameObjectsPlayers.Count}. {nickname}", Color.white);
     }
 
     public void PlayerStartOrStopMove(ChatPlayerMessage chatPlayerMessage, string command, bool isStopped)
@@ -72,9 +74,16 @@ public class PlayersManager : MonoBehaviour
 
     public void PlayersMoveManager(bool isStopped)
     {
-        foreach (var item in ListGameObjectsPlayers)
+        if (ListGameObjectsPlayers.Count == 0 && isStopped == false)
         {
-            item.GetComponent<Player>().Agent.isStopped = isStopped;
+            GameManager.Instance.GameOver();
+        }
+        else
+        {
+            foreach (var item in ListGameObjectsPlayers)
+            {
+                item.GetComponent<Player>().Agent.isStopped = isStopped;
+            }
         }
     }
 
@@ -90,6 +99,7 @@ public class PlayersManager : MonoBehaviour
             Color32 redColor = new Color32(224, 0, 0, 255);
             GameManager.Instance.PlayerListManager.ChangeColorHighscoreItem(gameObject.name, redColor);
             GameManager.Instance.UIManager.PopupMessageItemManager.InstantiateItem(gameObject.name, ItemType.Death);
+            DictionaryGameObjectsLosers.Add(gameObject.name, "DNF");
         }
         else
         {
@@ -114,20 +124,16 @@ public class PlayersManager : MonoBehaviour
     {
         if (ListGameObjectsPlayers.Count == 0)
         {
-            GameManager.Instance.GameOver();
-
-            foreach (KeyValuePair<string, string> item in DictionaryGameObjectsWinners)
-            {
-                //Debug.Log(item.Key + " " + item.Value);
-            }
-
-            //Debug.Log(PlayersManager.DictionaryGameObjectsWinners.First().Key + " " + PlayersManager.DictionaryGameObjectsWinners.First().Key + " WINNER!");
+            GameManager.Instance.GameOver();       
         }
     }
 
-    private void ShowWinner()
+    public string GetWinnerName()
     {
-
+        if (DictionaryGameObjectsWinners.Count > 0)
+            return DictionaryGameObjectsWinners.Keys.First();
+        else
+            return "";
     }
 
 

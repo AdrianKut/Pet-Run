@@ -40,15 +40,16 @@ public class GameManager : MonoBehaviour
     public IEnumerator StartGame()
     {
         //10sec countdown
-        //for (int countDownTime = 10; countDownTime > 0; countDownTime--)
+        //for (int countDownTime = 1; countDownTime > 0; countDownTime--)
         //{
         //    DisplayTextOnScreen(countDownTime.ToString());
         //    yield return new WaitForSeconds(1f);
         //}
 
-        yield return new WaitForSeconds(0.1f);
         DisplayTextOnScreen("RUN!");
-        GameState = GameState.Playing;
+        yield return new WaitForSeconds(1f);
+        
+        GameState = GameState.Playing; 
         PlayersManager.PlayersMoveManager(false);
     }
 
@@ -69,7 +70,7 @@ public class GameManager : MonoBehaviour
         GameState = GameState.GameOver;
 
         _gameObjectGameOverCanvas.SetActive(true);
-
+        
         Destroy(UIManager.gameObject);
     }
 }
