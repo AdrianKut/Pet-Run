@@ -46,9 +46,12 @@ public class GameManager : MonoBehaviour
         //    yield return new WaitForSeconds(1f);
         //}
 
-        DisplayTextOnScreen("RUN!");
-        yield return new WaitForSeconds(1f);
+        //DisplayTextOnScreen("RUN!");
+        //yield return new WaitForSeconds(1f);
         
+        DisplayTextOnScreen("RUN!");
+        yield return new WaitForSeconds(0.01f);
+
         GameState = GameState.Playing; 
         PlayersManager.PlayersMoveManager(false);
     }
@@ -70,7 +73,8 @@ public class GameManager : MonoBehaviour
         GameState = GameState.GameOver;
 
         _gameObjectGameOverCanvas.SetActive(true);
-        
-        Destroy(UIManager.gameObject);
+
+        //ZASTANOW SIE CZY USUWAC TO UI hmm
+       // Destroy(UIManager.gameObject);
     }
 }

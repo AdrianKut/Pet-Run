@@ -13,6 +13,9 @@ public class PlayersManager : MonoBehaviour
     [SerializeField] private Transform _destinationPosition;
     [SerializeField] private GameObject _gameObjectPlayer;
 
+    [SerializeField] private Color32 _colorDeath;
+    [SerializeField] private Color32 _colorWin;
+
     public List<GameObject> ListGameObjectsPlayers = new List<GameObject>();
     public Dictionary<string, string> DictionaryGameObjectsWinners = new Dictionary<string, string>();
     public Dictionary<string, string> DictionaryGameObjectsLosers = new Dictionary<string, string>();
@@ -96,15 +99,13 @@ public class PlayersManager : MonoBehaviour
     {
         if (isDead == true)
         {
-            Color32 redColor = new Color32(224, 0, 0, 255);
-            GameManager.Instance.PlayerListManager.ChangeColorHighscoreItem(gameObject.name, redColor);
+            GameManager.Instance.PlayerListManager.ChangeColorHighscoreItem(gameObject.name, _colorDeath);
             GameManager.Instance.UIManager.PopupMessageItemManager.InstantiateItem(gameObject.name, ItemType.Death);
             DictionaryGameObjectsLosers.Add(gameObject.name, "DNF");
         }
         else
         {
-            Color32 greenColor = new Color32(87, 224, 0, 255);
-            GameManager.Instance.PlayerListManager.ChangeColorHighscoreItem(gameObject.name, greenColor);
+            GameManager.Instance.PlayerListManager.ChangeColorHighscoreItem(gameObject.name, _colorWin);
             GameManager.Instance.UIManager.PopupMessageItemManager.InstantiateItem(gameObject.name, ItemType.Winning);
 
             string time = GameManager.Instance.UIManager.Timer.GetTime();
@@ -131,9 +132,15 @@ public class PlayersManager : MonoBehaviour
     public string GetWinnerName()
     {
         if (DictionaryGameObjectsWinners.Count > 0)
-            return DictionaryGameObjectsWinners.Keys.First();
+        {
+            var first = DictionaryGameObjectsWinners.First();
+            GameManager.Instance.TwitchChat.WriteChat($"{first.Key} has won!");
+            return first.Key;
+        }
         else
+        {
             return "";
+        }
     }
 
 

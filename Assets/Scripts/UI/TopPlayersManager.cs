@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TopPlayersManager : MonoBehaviour, IItemManager
+public class TopPlayersManager : ListManager
 {
     [SerializeField] private GameObject _gameObjectItem;
     [SerializeField] private List<GameObject> _listGameObjectItem = new List<GameObject>();
@@ -20,7 +20,7 @@ public class TopPlayersManager : MonoBehaviour, IItemManager
         }
     }
 
-    public void ChangeColorHighscoreItem(string nameOfGameObject, Color color)
+    public new void ChangeColorHighscoreItem(string nameOfGameObject, Color color)
     {
         foreach (var item in _listGameObjectItem)
         {

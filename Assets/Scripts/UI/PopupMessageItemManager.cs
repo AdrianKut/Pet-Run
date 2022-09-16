@@ -8,7 +8,7 @@ public enum ItemType
     Winning
 }
 
-public class PopupMessageItemManager : MonoBehaviour, IItemManager
+public class PopupMessageItemManager : ListManager
 {
     [SerializeField] private GameObject _gameObjectItemDeath;
     [SerializeField] private GameObject _gameObjectItemNewPlayer;
