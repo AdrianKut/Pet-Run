@@ -32,11 +32,11 @@ public class CameraManager : MonoBehaviour
 
     private void CameraMovement()
     {
-            float moveHorizontal = Input.GetAxis("Horizontal") * _speed;
-            float moveVertical = Input.GetAxis("Vertical") * _speed;
+        float moveHorizontal = Input.GetAxis("Horizontal") * _speed;
+        float moveVertical = Input.GetAxis("Vertical") * _speed;
 
-            transform.Translate(Vector3.forward * moveVertical * Time.deltaTime);
-            transform.Translate(Vector3.right * moveHorizontal * Time.deltaTime);
+        transform.Translate(Vector3.forward * moveVertical * Time.deltaTime);
+        transform.Translate(Vector3.right * moveHorizontal * Time.deltaTime);
 
         if (Input.GetKey(KeyCode.Mouse1))
         {

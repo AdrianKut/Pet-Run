@@ -10,17 +10,17 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
-    public GameState GameState { get; private set; }
-    public static GameManager Instance;
-
-    private GameManager() { }
+    [SerializeField] private GameObject _gameObjectGameOverCanvas;
 
     public UIManager UIManager;
     public TwitchChat TwitchChat;
     public PlayersManager PlayersManager;
     public PlayerListManager PlayerListManager;
 
-    [SerializeField] private GameObject _gameObjectGameOverCanvas;
+    public GameState GameState { get; private set; }
+    public static GameManager Instance;
+
+    private GameManager() { }
 
     private void Awake()
     {

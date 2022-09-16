@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
-using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class Player : MonoBehaviour

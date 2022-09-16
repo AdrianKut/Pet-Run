@@ -32,25 +32,24 @@ public class LeaderboardListManager : ListManager
 
         foreach (KeyValuePair<string, string> item in winnersDictionary)
         {
-            var text = ($"{++counter}.{item.Key} {item.Value}");
+            counter++;
+            var text = ($". {item.Key} {item.Value}");
             switch (counter)
             {
                 case 1:
-                    text = ($". {item.Key} {item.Value}");
                     InstantiateItem(text, _colorGoldMedal, _gameObjectGoldItem);
                     break;
 
                 case 2:
-                    text = ($". {item.Key} {item.Value}");
                     InstantiateItem(text, _colorSilverMedal, _gameObjectSilverItem);
                     break;
 
                 case 3:
-                    text = ($". {item.Key} {item.Value}");
                     InstantiateItem(text, _colorBronzeMedal, _gameObjectBronzeItem);
                     break;
 
                 default:
+                    text = ($"{counter}. {item.Key} {item.Value}");   
                     InstantiateItem(text, Color.white);
                     break;
             }
@@ -59,7 +58,7 @@ public class LeaderboardListManager : ListManager
         counter++;
         foreach (KeyValuePair<string, string> item in losersDictionary)
         {
-            var text = ($"{counter}.{item.Key} {item.Value}");
+            var text = ($"{counter}. {item.Key} {item.Value}");
             InstantiateItem(text, _colorLosers);
         }
     }

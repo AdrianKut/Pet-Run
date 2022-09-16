@@ -4,8 +4,8 @@ using UnityEngine;
 public class TopPlayersManager : ListManager
 {
     [SerializeField] private GameObject _gameObjectItem;
-    [SerializeField] private List<GameObject> _listGameObjectItem = new List<GameObject>();
     [SerializeField] private int _maxPlayers;
+    [SerializeField] private List<GameObject> _listGameObjectItem = new List<GameObject>();
 
     public void InstantiateItem(string message)
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TwitchChat : MonoBehaviour
 {
-    [Header("Settings")]
+    [Header("Main Settings")]
     [SerializeField] private string _username;
     [SerializeField] private string _channelName;
     [SerializeField] private string _password;
@@ -96,7 +96,7 @@ public class TwitchChat : MonoBehaviour
             }
         }
     }
-
+    
     public void Reconnect()
     {
         Connect();
