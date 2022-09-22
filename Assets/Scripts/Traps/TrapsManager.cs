@@ -16,6 +16,7 @@ public class TrapsManager : MonoBehaviour
     [Header("Balls")]
     [SerializeField] private GameObject[] _gameObjectBalls;
     [SerializeField] private float _forceSpeedBalls;
+    [SerializeField] private bool _droped = false;
 
     void Update()
     {
@@ -31,16 +32,21 @@ public class TrapsManager : MonoBehaviour
             StartCoroutine(MoveSpikeGlass());
         }
 
-        if (GameManager.Instance.GameState == GameState.Playing)
+        if (GameManager.Instance.GameState == GameState.Playing && _droped == false)
         {
-            foreach (var item in _gameObjectBalls)
-            {
-                var rb = item.GetComponent<Rigidbody>();
-                rb.constraints = RigidbodyConstraints.None;
-                rb.AddForce(Vector3.back * _forceSpeedBalls * Time.deltaTime, ForceMode.Force);
-                //umrze po dotarciu deahtzone
-                //Destroy(item, 10f);
-            }
+            StartCoroutine(DropTheBalls());
+        }
+    }
+
+    private IEnumerator DropTheBalls()
+    {
+        _droped = true;
+        foreach (var item in _gameObjectBalls)
+        {
+            var rb = item.GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.None;
+            rb.AddForce(Vector3.down * _forceSpeedBalls, ForceMode.Force);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -63,3 +69,4 @@ public class TrapsManager : MonoBehaviour
         _gameObjectGlass.transform.DOMoveX(startXPos, _durationMoveX);
     }
 }
+

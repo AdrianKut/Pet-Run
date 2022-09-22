@@ -16,6 +16,9 @@ public class DEBUG : MonoBehaviour
         Name += consonants[Random.Range(0,consonants.Length)].ToUpper();
         Name += vowels[Random.Range(0,vowels.Length)];
         int b = 2; //b tells how many times a new letter has been added. It's 2 right now because the first two letters are already in the name.
+        if (len >= 20)
+            len = 20;
+
         while (b < len)
         {
             Name += consonants[Random.Range(0,consonants.Length)];
