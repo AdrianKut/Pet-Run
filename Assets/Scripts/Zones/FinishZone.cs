@@ -9,7 +9,7 @@ public class FinishZone : MonoBehaviour
         if (collider.gameObject.GetComponent<Player>())
         {
             GameManager.Instance.PlayersManager.DestroyPlayer(collider.gameObject,false);
-            var gameObject = Instantiate(_gameObjectFinishRaceVFX, this.gameObject.transform.position, Quaternion.identity);
+            var gameObject = Instantiate(_gameObjectFinishRaceVFX, collider.transform.position, Quaternion.identity);
             Destroy(gameObject, 1f);
         }
 
@@ -17,7 +17,7 @@ public class FinishZone : MonoBehaviour
         //DEBUG
         if (collider.gameObject.GetComponent<Walk>())
         {
-            var gameObject = Instantiate(_gameObjectFinishRaceVFX, this.gameObject.transform.position, Quaternion.identity);
+            var gameObject = Instantiate(_gameObjectFinishRaceVFX, collider.transform.position, Quaternion.identity);
             Destroy(gameObject, 1f);
         }
 

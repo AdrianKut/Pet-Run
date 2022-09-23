@@ -302,5 +302,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destinationTransformPosition: {fileID: 0}
-  _speed: 0.01
+  _speed: 1
   _rb: {fileID: 0}
