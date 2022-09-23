@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnZone : MonoBehaviour
@@ -18,11 +16,11 @@ public class SpawnZone : MonoBehaviour
 
     public float GetMinZ()
     {
-        return _transformsCorners[2].transform.position.x;
+        return _transformsCorners[2].transform.position.z;
     }
 
     public float GetMaxZ()
     {
-        return _transformsCorners[3].transform.position.x;
+        return _transformsCorners[0].transform.position.z;
     }
 }

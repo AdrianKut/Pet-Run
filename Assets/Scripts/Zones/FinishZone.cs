@@ -12,5 +12,14 @@ public class FinishZone : MonoBehaviour
             var gameObject = Instantiate(_gameObjectFinishRaceVFX, this.gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject, 1f);
         }
+
+
+        //DEBUG
+        if (collider.gameObject.GetComponent<Walk>())
+        {
+            var gameObject = Instantiate(_gameObjectFinishRaceVFX, this.gameObject.transform.position, Quaternion.identity);
+            Destroy(gameObject, 1f);
+        }
+
     }
 }
