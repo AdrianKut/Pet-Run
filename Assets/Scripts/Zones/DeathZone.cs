@@ -15,5 +15,6 @@ public class DeathZone : MonoBehaviour
             GameManager.Instance.PlayersManager.DestroyPlayer(collision.gameObject, true);
         }
 
+        Destroy(collision.gameObject);
     }
 }

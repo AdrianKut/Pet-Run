@@ -1,13 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
-using TMPro;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private Transform _destinationTransformPosition;
     [SerializeField] private TextMeshPro _playerNickname;
-    [SerializeField] private float _speed;
 
     public NavMeshAgent Agent { get; private set; }
 
@@ -20,7 +19,7 @@ public class Player : MonoBehaviour
     private void LateUpdate()
     {
         RotateNicknameToCamera();
-       // CalculateDistanceToDistancePosition();
+        // CalculateDistanceToDistancePosition();
     }
 
     public void SetDestinationPosition(Transform target)

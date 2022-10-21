@@ -43,6 +43,7 @@ public class CameraManager : MonoBehaviour
             float rotX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * _mouseSensitivityX;
             rotY += Input.GetAxis("Mouse Y") * _mouseSensitivityY;
             rotY = Mathf.Clamp(rotY, -90f, 90f);
+
             transform.localEulerAngles = new Vector3(-rotY, rotX, 0.0f);
         }
     }

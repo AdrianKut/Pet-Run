@@ -186,6 +186,8 @@ GameObject:
   - component: {fileID: 2720179197825423166}
   - component: {fileID: 2720179197825423105}
   - component: {fileID: 2720179197825423104}
+  - component: {fileID: 3938638058110119087}
+  - component: {fileID: -715497626988176299}
   m_Layer: 0
   m_Name: TwitchPlayerWalker
   m_TagString: Player
@@ -302,5 +304,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destinationTransformPosition: {fileID: 0}
-  _speed: 1
-  _rb: {fileID: 0}
+  _forceSpeed: 5
+  _translateSpeed: 0.01
+--- !u!195 &3938638058110119087
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2720179197825423107}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &-715497626988176299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2720179197825423107}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b76a81fed9bf6458fee4de3fde7dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destinationTransformPosition: {fileID: 0}
+  _playerNickname: {fileID: 0}
+  _speed: 0

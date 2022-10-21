@@ -9,11 +9,10 @@ public class CredentialsInput : MonoBehaviour
     [SerializeField] private TMP_InputField _inputFieldPassword;
     [SerializeField] private TMP_InputField _inputFieldUsername;
     [SerializeField] private TMP_InputField _inputFieldChannelName;
-    [SerializeField] private TextMeshProUGUI _errorText;
+    [SerializeField] private TextMeshProUGUI _textMessage;
   
     [Header("Buttons")]
     [SerializeField] private Button _buttonStart;
-    [SerializeField] private Button _buttonConnect;
 
     [Space]
     [SerializeField] private TwitchChat _twitchChat;
@@ -31,7 +30,7 @@ public class CredentialsInput : MonoBehaviour
             string.IsNullOrEmpty(_inputFieldUsername.text) ||
             string.IsNullOrEmpty(_inputFieldChannelName.text))
         {
-            _errorText.text = "INPUT INVALID!";
+            _textMessage.text = "INPUT INVALID!";
         }
         else
         {
@@ -42,8 +41,8 @@ public class CredentialsInput : MonoBehaviour
             _twitchChat.gameObject.SetActive(true);
             _twitchChat.InitialCredentialsAndTryConnect();
 
-            _errorText.color = Color.green;
-            _errorText.text = "Connection established!";
+            _textMessage.color = Color.green;
+            _textMessage.text = "Connection established!";
             _buttonStart.interactable = true;
         }
     }

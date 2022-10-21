@@ -20,6 +20,12 @@ public class PlayersManager : MonoBehaviour
     public Dictionary<string, string> DictionaryGameObjectsWinners = new Dictionary<string, string>();
     public Dictionary<string, string> DictionaryGameObjectsLosers = new Dictionary<string, string>();
 
+    private GameManager _gameManager;
+    private void Start()
+    {
+        _gameManager = GameManager.Instance;
+    }
+
     public void JoinPlayerToTheGame(ChatPlayerMessage chatPlayerMessage)
     {
         var isAdded = false;
@@ -32,10 +38,10 @@ public class PlayersManager : MonoBehaviour
             }
         }
 
-        if (chatPlayerMessage.Message == "!j" && isAdded == false && GameManager.Instance.GameState == GameState.Pause)
+        if (chatPlayerMessage.Message == "!j" && isAdded == false && _gameManager.GameState == GameState.Pause)
         {
             SpawnNewPlayer(chatPlayerMessage.User);
-            GameManager.Instance.UIManager.PopupMessageItemManager.InstantiateItem(chatPlayerMessage.User, ItemType.NewPlayer);
+            _gameManager.UIManager.PopupMessageItemManager.InstantiateItem(chatPlayerMessage.User, ItemType.NewPlayer);
 
             _numberOfPlayers++;
             SetTextPlayersCounter();
@@ -54,15 +60,16 @@ public class PlayersManager : MonoBehaviour
         newPlayer.transform.GetChild(0).GetComponent<TextMeshPro>().text = nickname;
 
         newPlayer.GetComponent<Player>().SetDestinationPosition(_destinationPosition);
+        //newPlayer.GetComponent<Walk>().SetDestinationPosition(_destinationPosition);
 
         ListGameObjectsPlayers.Add(newPlayer);
 
-        GameManager.Instance.PlayerListManager.InstantiateItem($"{ListGameObjectsPlayers.Count}. {nickname}", Color.white);
+        _gameManager.PlayerListManager.InstantiateItem($"{ListGameObjectsPlayers.Count}. {nickname}", Color.white);
     }
 
     public void PlayerStartOrStopMove(ChatPlayerMessage chatPlayerMessage, string command, bool isStopped)
     {
-        if (GameManager.Instance.GameState == GameState.Playing)
+        if (_gameManager.GameState == GameState.Playing)
         {
             foreach (var item in ListGameObjectsPlayers)
             {
@@ -79,7 +86,7 @@ public class PlayersManager : MonoBehaviour
     {
         if (ListGameObjectsPlayers.Count == 0 && isStopped == false)
         {
-            GameManager.Instance.GameOver();
+            _gameManager.GameOver();
         }
         else
         {
@@ -99,17 +106,17 @@ public class PlayersManager : MonoBehaviour
     {
         if (isDead == true)
         {
-            GameManager.Instance.PlayerListManager.ChangeColorHighscoreItem(gameObject.name, _colorDeath);
-            GameManager.Instance.UIManager.PopupMessageItemManager.InstantiateItem(gameObject.name, ItemType.Death);
+            _gameManager.PlayerListManager.ChangeColorHighscoreItem(gameObject.name, _colorDeath);
+            _gameManager.UIManager.PopupMessageItemManager.InstantiateItem(gameObject.name, ItemType.Death);
             DictionaryGameObjectsLosers.Add(gameObject.name, "DNF");
         }
         else
         {
-            GameManager.Instance.PlayerListManager.ChangeColorHighscoreItem(gameObject.name, _colorWin);
-            GameManager.Instance.UIManager.PopupMessageItemManager.InstantiateItem(gameObject.name, ItemType.Winning);
+            _gameManager.PlayerListManager.ChangeColorHighscoreItem(gameObject.name, _colorWin);
+            _gameManager.UIManager.PopupMessageItemManager.InstantiateItem(gameObject.name, ItemType.Winning);
 
-            string time = GameManager.Instance.UIManager.Timer.GetTime();
-            GameManager.Instance.UIManager.HighscoreManager.InstantiateItem(gameObject.name + " - " + time);
+            string time = _gameManager.UIManager.Timer.GetTime();
+            _gameManager.UIManager.HighscoreManager.InstantiateItem(gameObject.name + " - " + time);
             DictionaryGameObjectsWinners.Add(gameObject.name, time);
         }
 
@@ -125,7 +132,7 @@ public class PlayersManager : MonoBehaviour
     {
         if (ListGameObjectsPlayers.Count == 0)
         {
-            GameManager.Instance.GameOver();       
+            _gameManager.GameOver();       
         }
     }
 
@@ -134,7 +141,7 @@ public class PlayersManager : MonoBehaviour
         if (DictionaryGameObjectsWinners.Count > 0)
         {
             var first = DictionaryGameObjectsWinners.First();
-            GameManager.Instance.TwitchChat.WriteChat($"{first.Key} has won!");
+            _gameManager.TwitchChat.WriteChat($"{first.Key} has won!");
             return first.Key;
         }
         else
@@ -163,7 +170,7 @@ public class PlayersManager : MonoBehaviour
     //                nearestPlayer = tempDistance;
     //                Debug.Log("WYGRYWA: " + gameObject.name + " " + tempDistance);
 
-    //                GameManager.Instance.UIManager.HighscoreManager.SetFirstOnHighscore(gameObject.name);
+    //                _gameManager.UIManager.HighscoreManager.SetFirstOnHighscore(gameObject.name);
     //            }
     //        }
 

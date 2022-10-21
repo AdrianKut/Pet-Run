@@ -133,7 +133,7 @@ NavMeshAgent:
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 0
+  m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
@@ -154,7 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destinationTransformPosition: {fileID: 0}
   _playerNickname: {fileID: 3851122779304505736}
-  _speed: 0
 --- !u!1 &3851122779304505738
 GameObject:
   m_ObjectHideFlags: 0

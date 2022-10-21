@@ -11,6 +11,7 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _gameObjectGameOverCanvas;
+    [SerializeField] private int _timeToStartTheGame;
 
     public UIManager UIManager;
     public TwitchChat TwitchChat;
@@ -39,16 +40,12 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartGame()
     {
-        //10sec countdown
-        //for (int countDownTime = 1; countDownTime > 0; countDownTime--)
-        //{
-        //    DisplayTextOnScreen(countDownTime.ToString());
-        //    yield return new WaitForSeconds(1f);
-        //}
+        for (int countDownTime = _timeToStartTheGame; countDownTime > 0; countDownTime--)
+        {
+            DisplayTextOnScreen(countDownTime.ToString());
+            yield return new WaitForSeconds(1f);
+        }
 
-        //DisplayTextOnScreen("RUN!");
-        //yield return new WaitForSeconds(1f);
-        
         DisplayTextOnScreen("RUN!");
         yield return new WaitForSeconds(0.01f);
 
