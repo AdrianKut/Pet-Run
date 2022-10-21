@@ -1830,7 +1830,7 @@ GameObject:
   - component: {fileID: 694366285}
   - component: {fileID: 694366284}
   m_Layer: 0
-  m_Name: Menu Manager
+  m_Name: Credentials Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1851,9 +1851,8 @@ MonoBehaviour:
   _inputFieldPassword: {fileID: 475506941}
   _inputFieldUsername: {fileID: 940511115}
   _inputFieldChannelName: {fileID: 675073285}
-  _errorText: {fileID: 704538078}
+  _textMessage: {fileID: 704538078}
   _buttonStart: {fileID: 351191681}
-  _buttonConnect: {fileID: 1467100111}
   _twitchChat: {fileID: 506411672}
 --- !u!4 &694366285
 Transform:
@@ -1882,7 +1881,7 @@ GameObject:
   - component: {fileID: 704538079}
   - component: {fileID: 704538078}
   m_Layer: 5
-  m_Name: Text Error
+  m_Name: Text Message
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
