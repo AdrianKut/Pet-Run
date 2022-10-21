@@ -24,6 +24,12 @@ public class PlayersManager : MonoBehaviour
     private void Start()
     {
         _gameManager = GameManager.Instance;
+
+        if (_spawnZone == null || _destinationPosition == null || _gameObjectPlayer == null)
+        {
+            Debug.LogWarning("No objects asigned!");
+            return;
+        }
     }
 
     public void JoinPlayerToTheGame(ChatPlayerMessage chatPlayerMessage)
@@ -132,7 +138,7 @@ public class PlayersManager : MonoBehaviour
     {
         if (ListGameObjectsPlayers.Count == 0)
         {
-            _gameManager.GameOver();       
+            _gameManager.GameOver();
         }
     }
 
